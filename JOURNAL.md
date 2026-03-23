@@ -40,3 +40,8 @@
 - **Hook Version**: 1.02
 - **Date**: 23-03-2026 11:53
 - **Prompt**: Can you explain to me how bubble sort works ?
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 23-03-2026 11:53
+- **Prompt**: Help me learn how to write a bubble sorrt application un python
