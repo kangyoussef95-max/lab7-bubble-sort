@@ -35,3 +35,8 @@
 - **Hook Version**: 1.02
 - **Date**: 23-03-2026 11:52
 - **Prompt**: Read #file:copilot-instructions.md and #file:journal-logger.agent.md
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 23-03-2026 11:53
+- **Prompt**: Can you explain to me how bubble sort works ?

@@ -11,3 +11,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:52
 - **Prompt**: Read #file:copilot-instructions.md and #file:journal-logger.agent.md
 
+### 23-03-2026 11:53
+- **Prompt**: Can you explain to me how bubble sort works ?
+
