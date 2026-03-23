@@ -8,3 +8,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:42
 - **Prompt**: Help me learn how to write a bubble sorrt application un python
 
+### 23-03-2026 11:52
+- **Prompt**: Read #file:copilot-instructions.md and #file:journal-logger.agent.md
+
