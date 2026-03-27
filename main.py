@@ -16,8 +16,10 @@ def parse_user_input(raw_text: str) -> list[int]:
     # 3) Convert each item to int.
     # 4) Return the final list.
     # Hint: Start with: parts = raw_text.split(",")
-    raise NotImplementedError("TODO 1: implement parse_user_input")
-
+    parts = raw_text.split(",")
+    numbers = [int(item.strip()) for item in parts]
+    return numbers
+    
 
 def bubble_sort_pass(values: list[int], last_index: int) -> bool:
     """Do one left-to-right bubble pass up to last_index.
