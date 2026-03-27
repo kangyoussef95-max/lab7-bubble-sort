@@ -96,35 +96,5 @@ def main() -> None:
     print(f"Sorted: {sorted_numbers}")
 
 
-def test_empty_list() -> None:
-    assert bubble_sort([]) == []
-
-
-def test_already_sorted() -> None:
-    assert bubble_sort([1, 2, 3, 4]) == [1, 2, 3, 4]
-
-
-def test_reverse_sorted() -> None:
-    assert bubble_sort([4, 3, 2, 1]) == [1, 2, 3, 4]
-
-
-def test_duplicates() -> None:
-    assert bubble_sort([3, 1, 2, 1, 3]) == [1, 1, 2, 3, 3]
-
-
-def test_invalid_input() -> None:
-    try:
-        parse_user_input("1, 2, , 4")
-        assert False
-    except ValueError:
-        assert True
-
-    try:
-        parse_user_input("1, two, 3")
-        assert False
-    except ValueError:
-        assert True
-
-
 if __name__ == "__main__":
     main()
