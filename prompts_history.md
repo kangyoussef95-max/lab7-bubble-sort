@@ -47,3 +47,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 18:57
 - **Prompt**: Can you review my implementation and make some suggestions?
 
+### 27-03-2026 19:15
+- **Prompt**: Can you set up testing for this app, using basic pytest features and create 5 tests?
+
