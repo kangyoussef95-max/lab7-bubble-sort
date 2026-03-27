@@ -101,3 +101,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 22:05
 - **Prompt**: i get this now : Traceback (most recent call last):   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 269, in <module>     main()     ~~~~^^   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 250, in main     sorted_numbers = bubble_sort_visual(numbers)   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 144, in bubble_sort_visual     swapped = bubble_sort_pass_visual(values, n - i - 1, i + 1)   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 134, in bubble_sort_pass_visual     return swapped            ^^^^^^^ UnboundLocalError: cannot access local variable 'swapped' where it is not associated with a value
 
+### 27-03-2026 22:06
+- **Prompt**: Can you install PyGame in the local virtual environment and then create a requirements.txt that includes the required libraries to run this project, and finally update README to explain all of this?
+
