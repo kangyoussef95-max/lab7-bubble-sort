@@ -32,6 +32,10 @@ def bubble_sort_pass(values: list[int], last_index: int) -> bool:
     # Loop j from 0 to last_index - 1.
     # Compare values[j] and values[j + 1].
     # If left > right, swap them and set swapped = True.
+    for j in range(0, last_index):
+        if values[j] > values[j + 1]:
+            values[j], values[j + 1] = values[j + 1], values[j]
+            swapped = True
 
     return swapped
 
