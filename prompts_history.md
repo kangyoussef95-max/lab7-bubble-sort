@@ -95,3 +95,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 21:58
 - **Prompt**: Can you implement a Pygame based visualization?
 
+### 27-03-2026 22:04
+- **Prompt**: I get this errir :   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 251, in main     sorted_numbers = bubble_sort_animated(numbers)   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 212, in bubble_sort_animated     swapped = bubble_sort_pass_animated(values, n - i - 1, i + 1, delay)   File "c:\Users\PC\OneDrive\Documents\College\S2\AIsoftwareeng\lab7-bubble-sort\main.py", line 198, in bubble_sort_pass_animated     if swapped:        ^^^^^^^ UnboundLocalError: cannot access local variable 'swapped' where it is not associated with a value
+
