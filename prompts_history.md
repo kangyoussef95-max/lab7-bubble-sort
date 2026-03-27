@@ -59,3 +59,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 19:23
 - **Prompt**: 1. each swap.   2. preferably bar chart
 
+### 27-03-2026 21:27
+- **Prompt**: Would the ASCII bar display itself in place, so that it looks like an animation, or is it going to be a series of dumps of the state of the list?
+
