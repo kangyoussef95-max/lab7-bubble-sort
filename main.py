@@ -51,8 +51,8 @@ def bubble_sort(values: list[int]) -> list[int]:
     # On pass i, call bubble_sort_pass(values, n - i - 1).
     # If no swaps happened on a pass, break early.
     for i in range(n):
-        bubble_sort_pass(values, n - i - 1)
-        if not bubble_sort_pass(values, n - i - 1):
+        swap = bubble_sort_pass(values, n - i - 1)
+        if not swap:
             break
 
     return values
@@ -68,7 +68,7 @@ def main() -> None:
     # TODO 4:
     # Use parse_user_input(raw_text) to get a list of ints.
     # Store it in a variable, for example: numbers.
-    raise NotImplementedError("TODO 4: parse and store input list")
+    
 
     # TODO 5:
     # Call bubble_sort(numbers) and print the result.
