@@ -10,7 +10,7 @@ def parse_user_input(raw_text: str) -> list[int]:
 
     Example input: "5, 1, 4, 2"
     """
-    # TODO 1: 
+    # TODO 1:
     # 1) Split raw_text by commas.
     # 2) Strip spaces from each item.
     # 3) Convert each item to int.
@@ -68,11 +68,13 @@ def main() -> None:
     # TODO 4:
     # Use parse_user_input(raw_text) to get a list of ints.
     # Store it in a variable, for example: numbers.
-    
+    numbers = parse_user_input(raw_text)
 
     # TODO 5:
     # Call bubble_sort(numbers) and print the result.
     # Example output: Sorted: [1, 2, 4, 5]
+    sorted_numbers = bubble_sort(numbers)
+    print(f"Sorted: {sorted_numbers}")
 
 
 if __name__ == "__main__":
