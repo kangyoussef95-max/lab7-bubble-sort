@@ -41,3 +41,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 18:41
 - **Prompt**: why does bubble sort need multiple passes fron 0 to n - 1
 
+### 27-03-2026 18:44
+- **Prompt**: can you give me some constructive criticism for my code so far
+
