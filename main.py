@@ -1,7 +1,8 @@
-"""Bubble sort learning scaffold.
+"""Bubble sort learning app with three visualization modes.
 
-This file is intentionally written as a guided skeleton with TODOs.
-Complete each TODO in order to build your own working app.
+Provides core bubble sort implementation with non-visual, series (waterfall),
+and in-place animation (carriage return) visualization options. Includes
+input validation and CLI for interactive sorting.
 """
 
 import sys
@@ -11,14 +12,9 @@ import time
 def parse_user_input(raw_text: str) -> list[int]:
     """Convert comma-separated user text into a list of integers.
 
-    Example input: "5, 1, 4, 2"
+    Example: parse_user_input("5, 1, 4, 2") → [5, 1, 4, 2]
+    Raises ValueError if input is invalid (empty values, non-integers).
     """
-    # Done:
-    # 1) Split raw_text by commas.
-    # 2) Strip spaces from each item.
-    # 3) Convert each item to int.
-    # 4) Return the final list.
-    # Hint: Start with: parts = raw_text.split(",")
     if raw_text.strip() == "":
         return []
 
@@ -41,15 +37,18 @@ def parse_user_input(raw_text: str) -> list[int]:
 
 def bubble_sort_pass(values: list[int], last_index: int) -> bool:
     """Do one left-to-right bubble pass up to last_index.
-
-    Return True if at least one swap happened, otherwise False.
+    
+    Compares adjacent elements and swaps if out of order.
+    After one pass, the largest unsorted value moves to index last_index.
+    
+    Args:
+        values: list to sort (mutated in place)
+        last_index: upper bound (exclusive) for comparisons
+        
+    Returns:
+        True if any swap occurred, False if already sorted in range.
     """
     swapped = False
-
-    # Done:
-    # Loop j from 0 to last_index - 1.
-    # Compare values[j] and values[j + 1].
-    # If left > right, swap them and set swapped = True.
     for j in range(0, last_index):
         if values[j] > values[j + 1]:
             values[j], values[j + 1] = values[j + 1], values[j]
@@ -59,13 +58,13 @@ def bubble_sort_pass(values: list[int], last_index: int) -> bool:
 
 
 def bubble_sort(values: list[int]) -> list[int]:
-    """Sort values in ascending order using bubble sort and return it."""
+    """Sort values in ascending order using bubble sort (in-place).
+    
+    Runs up to n-1 passes, with early exit when no swaps occur.
+    Time complexity: O(n²) worst case, O(n) best case (already sorted).
+    Space complexity: O(1).
+    """
     n = len(values)
-
-    # Done:
-    # Run multiple passes with i from 0 to n - 1.
-    # On pass i, call bubble_sort_pass(values, n - i - 1).
-    # If no swaps happened on a pass, break early.
     for i in range(n):
         swapped = bubble_sort_pass(values, n - i - 1)
         if not swapped:
@@ -75,23 +74,13 @@ def bubble_sort(values: list[int]) -> list[int]:
 
 
 def format_swap_display(values: list[int], pass_num: int, pos_a: int, pos_b: int) -> str:
-    """Return a formatted string showing bars and swap position.
+    """Return a formatted string showing bars and swap position (series mode).
     
-    Example output: "Pass 1, Swap at (0,1): [##      #   ]"
+    Generates horizontal bar chart with pass and swap position info.
+    Bars are space-separated and scaled to fit terminal width.
     
-    Args:
-        values: current list of integers
-        pass_num: which pass number (1-indexed)
-        pos_a: first index being swapped
-        pos_b: second index being swapped
-    
-    Returns:
-        Formatted string with pass info, swap positions, and bar chart.
+    Example: "Pass 1, Swap at (0,1): [##      #   ]"
     """
-    # TODO: Visualization Step 1
-    # 1) Generate bar chart from values (each # represents one unit).
-    # 2) Handle scaling if max value is large (e.g., keep bars under 40 chars).
-    # 3) Return format: f"Pass {pass_num}, Swap at ({pos_a},{pos_b}): [{bars}]"
     if not values:
         bars = ""
     else:
@@ -117,20 +106,11 @@ def format_swap_display(values: list[int], pass_num: int, pos_a: int, pos_b: int
 
 
 def bubble_sort_pass_visual(values: list[int], last_index: int, pass_num: int) -> bool:
-    """Do one bubble pass with visualization of each swap.
+    """Do one bubble pass with series visualization (waterfall dumps).
     
-    Returns True if at least one swap happened, otherwise False.
+    Prints each swap on a new line showing bars and positions.
+    This preserves full history of swaps in terminal output.
     """
-    swapped = False
-
-    # TODO: Visualization Step 2
-    # 1) Loop j from 0 to last_index - 1.
-    # 2) Compare values[j] and values[j + 1].
-    # 3) If swap needed:
-    #    a) Perform the swap.
-    #    b) Call format_swap_display(...) to get the display string.
-    #    c) Print the string.
-    #    d) Set swapped = True.
     for j in range(0, last_index):
         if values[j] > values[j + 1]:
             values[j], values[j + 1] = values[j + 1], values[j]
@@ -142,13 +122,11 @@ def bubble_sort_pass_visual(values: list[int], last_index: int, pass_num: int) -
 
 
 def bubble_sort_visual(values: list[int]) -> list[int]:
-    """Sort values with visualization of every swap."""
+    """Sort values with series visualization (waterfall mode).
+    
+    Each swap is printed on a new line for review and debugging.
+    """
     n = len(values)
-
-    # TODO: Visualization Step 3
-    # Run multiple passes (similar to bubble_sort).
-    # On pass i, call bubble_sort_pass_visual(values, n - i - 1, i + 1).
-    # If no swaps happened on a pass, break early.
     for i in range(n):
         swapped = bubble_sort_pass_visual(values, n - i - 1, i + 1)
         if not swapped:
@@ -160,15 +138,11 @@ def bubble_sort_visual(values: list[int]) -> list[int]:
 def format_swap_display_animated(values: list[int], pass_num: int, pos_a: int, pos_b: int) -> str:
     """Return a single-line formatted string for in-place animation redraw.
     
-    Similar to format_swap_display but optimized for \r carriage return redraws.
-    No newline at end—meant to be overwritten.
+    Optimized for carriage return (\r) redraws. Returns string starting with \r
+    so it overwrites previous line in same terminal row, creating animation effect.
     
-    Example output: "Pass 1, Swap at (0,1): [##      #   ]"
+    Example: "\rPass 1, Swap at (0,1): [##      #   ]"
     """
-    # TODO: Animated Step 1
-    # 1) Generate bar chart from values (reuse scaling logic if possible).
-    # 2) Keep bars under fixed width for consistent redraw (e.g., 50 chars total).
-    # 3) Return format string without trailing newline for \r redraw.
     if not values:
         bars = ""
     else:
@@ -194,22 +168,11 @@ def format_swap_display_animated(values: list[int], pass_num: int, pos_a: int, p
 
 
 def bubble_sort_pass_animated(values: list[int], last_index: int, pass_num: int, delay: float = 0.1) -> bool:
-    """Do one bubble pass with in-place animation using \\r carriage return.
+    """Do one bubble pass with in-place animation redraw (\\r carriage return).
     
-    Returns True if at least one swap happened, otherwise False.
+    Each swap overwrites the previous line using carriage return, creating
+    a smooth animation effect. Delay controls speed of animation.
     """
-    swapped = False
-
-    # TODO: Animated Step 2
-    # 1) Loop j from 0 to last_index - 1.
-    # 2) Compare values[j] and values[j + 1].
-    # 3) If swap needed:
-    #    a) Perform the swap.
-    #    b) Call format_swap_display_animated(...) to get the display string.
-    #    c) Print display string with end="", flush=True, then sys.stdout.flush().
-    #    d) Import time and time.sleep(delay) for animation speed.
-    #    e) Set swapped = True.
-    # 4) After swap, print newline so next output starts fresh.
     for j in range(0, last_index):
         if values[j] > values[j + 1]:
             values[j], values[j + 1] = values[j + 1], values[j]
@@ -226,17 +189,12 @@ def bubble_sort_pass_animated(values: list[int], last_index: int, pass_num: int,
 
 
 def bubble_sort_animated(values: list[int], delay: float = 0.1) -> list[int]:
-    """Sort values with in-place animation for each swap.
+    """Sort values with in-place animation redraw (animation mode).
     
-    Uses \\r carriage return to redraw bars on same line, creating animation effect.
+    Uses carriage return (\\r) to redraw bars on same terminal line,
+    creating smooth animation effect. Adjustable delay for speed control.
     """
     n = len(values)
-
-    # TODO: Animated Step 3
-    # 1) Run multiple passes with i from 0 to n - 1.
-    # 2) On pass i, call bubble_sort_pass_animated(values, n - i - 1, i + 1, delay).
-    # 3) If no swaps happened on a pass, break early.
-    # 4) After last swap of a pass, print a newline so "Sorted: ..." starts fresh.
     for i in range(n):
         swapped = bubble_sort_pass_animated(values, n - i - 1, i + 1, delay)
         if not swapped:
@@ -246,35 +204,24 @@ def bubble_sort_animated(values: list[int], delay: float = 0.1) -> list[int]:
 
 
 def main() -> None:
-    """Simple CLI app entry point."""
+    """Interactive CLI for bubble sort with three visualization modes.
+    
+    Modes:
+    1. No visualization - fast sort with no output
+    2. Series (waterfall) - each swap on new line
+    3. Animation - in-place redraw using carriage return
+    """
     print("Bubble Sort Learning App")
     print("Enter numbers separated by commas (example: 5, 1, 4, 2)")
 
     while True:
         raw_text = input("Numbers: ")
-
-        # Done:
-        # Use parse_user_input(raw_text) to get a list of ints.
-        # Store it in a variable, for example: numbers.
         try:
             numbers = parse_user_input(raw_text)
             break
         except ValueError as error:
             print(f"Input error: {error}")
             print("Please try again.")
-
-    # TODO: Animated Step 4
-    # 1) Print menu options:
-    #    - "1. No visualization"
-    #    - "2. Series visualization (waterfall dumps)"
-    #    - "3. In-place animation (redraws on same line)"
-    # 2) Ask user: "Choose visualization mode (1-3): "
-    # 3) Store response in a variable, for example: viz_mode.
-    # 4) Route to appropriate sort function:
-    #    - Mode 1: call bubble_sort(numbers)
-    #    - Mode 2: call bubble_sort_visual(numbers)
-    #    - Mode 3: call bubble_sort_animated(numbers)
-    # 5) Print the sorted result.
     print("1. No visualization")
     print("2. Series visualization (waterfall dumps)")
     print("3. In-place animation (redraws on same line)")
