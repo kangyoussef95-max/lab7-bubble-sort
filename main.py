@@ -1,12 +1,25 @@
-"""Bubble sort learning app with three visualization modes.
+"""Bubble sort learning app with four visualization modes.
 
 Provides core bubble sort implementation with non-visual, series (waterfall),
-and in-place animation (carriage return) visualization options. Includes
-input validation and CLI for interactive sorting.
+in-place animation (carriage return), and 2D Pygame visualization options.
+Includes input validation and CLI for interactive sorting.
 """
 
 import sys
 import time
+
+try:
+    import pygame
+    PYGAME_AVAILABLE = True
+except ImportError:
+    PYGAME_AVAILABLE = False
+
+# Import Pygame visualizer only if available
+if PYGAME_AVAILABLE:
+    try:
+        from pygame_visualizer import visualize_bubble_sort
+    except ImportError:
+        PYGAME_AVAILABLE = False
 
 
 def parse_user_input(raw_text: str) -> list[int]:
@@ -111,6 +124,7 @@ def bubble_sort_pass_visual(values: list[int], last_index: int, pass_num: int) -
     Prints each swap on a new line showing bars and positions.
     This preserves full history of swaps in terminal output.
     """
+    swapped = False
     for j in range(0, last_index):
         if values[j] > values[j + 1]:
             values[j], values[j + 1] = values[j + 1], values[j]
@@ -173,6 +187,7 @@ def bubble_sort_pass_animated(values: list[int], last_index: int, pass_num: int,
     Each swap overwrites the previous line using carriage return, creating
     a smooth animation effect. Delay controls speed of animation.
     """
+    swapped = False
     for j in range(0, last_index):
         if values[j] > values[j + 1]:
             values[j], values[j + 1] = values[j + 1], values[j]
@@ -204,12 +219,13 @@ def bubble_sort_animated(values: list[int], delay: float = 0.1) -> list[int]:
 
 
 def main() -> None:
-    """Interactive CLI for bubble sort with three visualization modes.
+    """Interactive CLI for bubble sort with four visualization modes.
     
     Modes:
     1. No visualization - fast sort with no output
     2. Series (waterfall) - each swap on new line
     3. Animation - in-place redraw using carriage return
+    4. Pygame 2D - animated bars with color feedback (if pygame is installed)
     """
     print("Bubble Sort Learning App")
     print("Enter numbers separated by commas (example: 5, 1, 4, 2)")
@@ -222,15 +238,28 @@ def main() -> None:
         except ValueError as error:
             print(f"Input error: {error}")
             print("Please try again.")
+    
     print("1. No visualization")
     print("2. Series visualization (waterfall dumps)")
     print("3. In-place animation (redraws on same line)")
-    viz_mode = input("Choose visualization mode (1-3): ").strip()
+    if PYGAME_AVAILABLE:
+        print("4. Pygame 2D visualization (animated bars)")
+    
+    viz_mode = input("Choose visualization mode (1-4): ").strip()
 
     if viz_mode == "2":
         sorted_numbers = bubble_sort_visual(numbers)
     elif viz_mode == "3":
         sorted_numbers = bubble_sort_animated(numbers)
+    elif viz_mode == "4" and PYGAME_AVAILABLE:
+        print("\nLaunching Pygame visualization...")
+        print("(Close the window or press ESC to finish)")
+        try:
+            sorted_numbers = visualize_bubble_sort(numbers)
+        except Exception as e:
+            print(f"Pygame visualization error: {e}")
+            print("Falling back to non-visual sort...")
+            sorted_numbers = bubble_sort(numbers)
     else:
         sorted_numbers = bubble_sort(numbers)
 

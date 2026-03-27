@@ -4,7 +4,7 @@ A beginner-friendly Python command-line app to practice bubble sort algorithm im
 
 ## Features
 
-- Three visualization modes for learning sorting behavior
+- Four visualization modes for learning sorting behavior
 - Accepts comma-separated integers from user input
 - Robust input validation with friendly error messages
 - Sorts numbers in ascending order using bubble sort
@@ -15,6 +15,7 @@ A beginner-friendly Python command-line app to practice bubble sort algorithm im
 ## Project Structure
 
 - `main.py`: application logic and CLI entry point
+- `pygame_visualizer.py`: 2D Pygame visualization module (requires pygame)
 - `tests/test_main.py`: pytest test suite (5 tests)
 - `pytest.ini`: pytest discovery configuration
 - `JOURNAL.md`: interaction/change log
@@ -23,21 +24,46 @@ A beginner-friendly Python command-line app to practice bubble sort algorithm im
 
 - Python 3.10+ (project currently runs on Python 3.13)
 - `pytest` for running tests
+- `pygame` (optional, for 2D visualization mode)
 
 ## Setup
 
-Create and activate a virtual environment (recommended):
+### Prerequisites
+- Python 3.10+ (project currently runs on Python 3.13)
+
+### Installation
+
+1. **Create and activate a virtual environment** (recommended):
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Install test dependency:
+2. **Install dependencies from requirements.txt**:
 
+```powershell
+pip install -r requirements.txt
+```
+
+This installs:
+- `pytest==9.0.2` - Testing framework for running automated tests
+- `pygame==2.6.1` - 2D graphics library for Mode 4 visualization (optional but recommended)
+
+**Alternative:** If you only want to run without visualizations:
 ```powershell
 pip install pytest
 ```
+
+### Verify Installation
+
+Test that everything is working:
+
+```powershell
+pytest
+```
+
+You should see `5 passed` in the output.
 
 ## Run the App
 
@@ -84,6 +110,19 @@ The app offers three visualization approaches:
 - Best for: visual learners, interactive demos
 - Terminal requirement: supports carriage return (most modern terminals)
 
+### Mode 4: Pygame 2D Visualization (Requires pygame)
+- Full 2D graphics window with animated bar charts
+- Color feedback:
+  - Blue: normal state
+  - Yellow: elements being compared
+  - Red: elements being swapped
+  - Green: correctly sorted elements
+- Real-time statistics: pass number, comparison/swap count
+- Smooth animations for swap operations
+- Best for: visual learners, understanding algorithm flow, demos
+- Window interaction: close window or press ESC to finish
+- Performance: ~60 FPS animation (configurable)
+
 
 
 ## Run Tests
@@ -128,6 +167,11 @@ You should see output similar to:
 - `format_swap_display_animated()` - single-line renderer
 - `bubble_sort_pass_animated()` - pass with animation
 - `bubble_sort_animated()` - full sort with animation
+
+**2D Graphics** (separate module: `pygame_visualizer.py`):
+- `BubbleSortVisualizer` class - Pygame window management and rendering
+- `visualize_bubble_sort()` - convenience function to run visualization
+- Color-coded bars with real-time statistics display
 
 ### Terminal Tips
 - Animation mode works best in modern terminals (Windows 10+, macOS, Linux)
