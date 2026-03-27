@@ -65,3 +65,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 21:38
 - **Prompt**: bars and positiobs
 
+### 27-03-2026 21:38
+- **Prompt**: make the stubs for all of this
+
