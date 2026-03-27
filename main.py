@@ -10,16 +10,18 @@ def parse_user_input(raw_text: str) -> list[int]:
 
     Example input: "5, 1, 4, 2"
     """
-    # TODO 1:
+    # TODO 1: 
     # 1) Split raw_text by commas.
     # 2) Strip spaces from each item.
     # 3) Convert each item to int.
     # 4) Return the final list.
     # Hint: Start with: parts = raw_text.split(",")
+    if raw_text.strip() == "":
+        return []
     parts = raw_text.split(",")
     numbers = [int(item.strip()) for item in parts]
     return numbers
-    
+
 
 def bubble_sort_pass(values: list[int], last_index: int) -> bool:
     """Do one left-to-right bubble pass up to last_index.
@@ -48,6 +50,10 @@ def bubble_sort(values: list[int]) -> list[int]:
     # Run multiple passes with i from 0 to n - 1.
     # On pass i, call bubble_sort_pass(values, n - i - 1).
     # If no swaps happened on a pass, break early.
+    for i in range(n):
+        bubble_sort_pass(values, n - i - 1)
+        if not bubble_sort_pass(values, n - i - 1):
+            break
 
     return values
 
