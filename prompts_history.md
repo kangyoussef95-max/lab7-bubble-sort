@@ -38,3 +38,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 18:27
 - **Prompt**: Can you help me learn by writing a skeleton bubble sort app with stubs functions, with comments and TODOs that will indicate what I need to do?
 
+### 27-03-2026 18:41
+- **Prompt**: why does bubble sort need multiple passes fron 0 to n - 1
+
